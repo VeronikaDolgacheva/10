@@ -1,0 +1,83 @@
+using System;
+
+namespace dz224_21
+{
+    class BankAccount
+    {
+        private string owner;
+        private double balance;
+
+        public string Owner
+        {
+            get { return owner; }
+            set { owner = value; }
+        }
+
+        public double Balance
+        {
+            get { return balance; }
+            set
+            {
+                if (value < 0)
+                {
+                    Console.WriteLine("Баланс не может быть отрицательным!");
+                    balance = 0;
+                }
+                else
+                {
+                    balance = value;
+                }
+            }
+        }
+
+        public BankAccount(string owner, double balance)
+        {
+            Owner = owner;
+            Balance = balance;
+        }
+
+        public void Deposit(double amount)
+        {
+            if (amount > 0)
+            {
+                Balance += amount;
+                Console.WriteLine($"{Owner}, баланс: {Balance}.");
+            }
+            else
+            {
+                Console.WriteLine("Сумма должна быть больше 0!");
+            }
+        }
+
+        public void Withdraw(double amount)
+        {
+            if (amount <= 0)
+            {
+                Console.WriteLine("Сумма должна быть больше 0!");
+            }
+            else if (amount > Balance)
+            {
+                Console.WriteLine("Недостаточно средств!");
+            }
+            else
+            {
+                Balance -= amount;
+                Console.WriteLine($"{Owner}, баланс: {Balance}.");
+            }
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+            BankAccount acc = new BankAccount("Иван", 1000);
+            acc.Deposit(500);    
+            acc.Withdraw(500);   
+            acc.Withdraw(2000); 
+
+            Console.ReadLine();
+        }
+    }
+}
