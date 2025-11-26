@@ -1,0 +1,61 @@
+using System;
+
+namespace dz224_21
+{
+    internal class Person
+    {
+        private string name;
+        private int age;
+
+        public string Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public int Age
+        {
+            get { return age; }
+            set
+            {
+                if (value < 0 || value > 120)
+                {
+                    Console.WriteLine("Возраст должен быть от 0 до 120!");
+                    age = 0;
+                }
+                else
+                {
+                    age = value;
+                }
+            }
+        }
+
+        public Person(string name, int age)
+        {
+            Name = name;
+            Age = age;
+        }
+
+        public void SayHello()
+        {
+            Console.WriteLine($"Привет, я {Name}, мне {Age} лет!");
+        }
+    }
+
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Person p1 = new Person("Александр", 25);
+            p1.SayHello();
+
+            Person p2 = new Person("Александр", 150);
+            p2.SayHello();
+
+            Person p3 = new Person("Александр", -5);
+            p3.SayHello();
+
+            Console.ReadLine();
+        }
+    }
+}
